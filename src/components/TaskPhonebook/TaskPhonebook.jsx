@@ -4,9 +4,13 @@ import Section from '../Section';
 import Filter from '../Filter';
 import ContactList from '../ContactList';
 import { ContactForm } from '../ContactForm';
-import s from './TaskPhonebook.module.css';
+
+import { ConfettiContainer } from '../Confetti';
+import { login } from './utils';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import s from './TaskPhonebook.module.css';
 
 export default class TaskPhonebook extends Component {
   state = {
@@ -19,6 +23,37 @@ export default class TaskPhonebook extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({
+        contacts: parsedContacts,
+      });
+    }
+
+    this.setState({
+      totalContacts: this.state.contacts.length,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const nextContacts = this.state.contacts;
+    const prevContacts = prevState.contacts;
+
+    if (nextContacts !== prevContacts) {
+      localStorage.setItem('contacts', JSON.stringify(nextContacts));
+    }
+
+    if (
+      nextContacts.length !== prevContacts.length &&
+      prevContacts.length !== 5
+    ) {
+      login.submit();
+    }
+  }
 
   onAddContact = contact => {
     const { contacts } = this.state;
@@ -47,6 +82,7 @@ export default class TaskPhonebook extends Component {
 
   render() {
     const { contacts, filter } = this.state;
+
     let renderContacts = contacts;
 
     renderContacts = contacts.filter(({ name }) =>
@@ -66,6 +102,7 @@ export default class TaskPhonebook extends Component {
             contacts={renderContacts}
             handleClickDelete={this.handleClickDelete}
           />
+          <ConfettiContainer />
         </Section>
       </div>
     );

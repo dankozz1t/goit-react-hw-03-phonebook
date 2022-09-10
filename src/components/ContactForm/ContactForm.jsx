@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import { login } from './utils';
-import { ConfettiContainer } from '../Confetti';
-
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 
@@ -27,8 +24,6 @@ export class ContactForm extends Component {
     this.props.onAddContact(newContact);
 
     this.setState({ name: '', number: '' });
-
-    login.submit();
   };
 
   handleInputChange = e => {
@@ -68,7 +63,6 @@ export class ContactForm extends Component {
         <button className={s.btn} type="submit">
           Add contact
         </button>
-        <ConfettiContainer />
       </form>
     );
   }

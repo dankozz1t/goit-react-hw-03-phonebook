@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import ConfettiComponent from 'react-confetti';
 import ReactDOM from 'react-dom';
 
-import { login } from '../ContactForm';
+import { login } from '../TaskPhonebook/utils';
 
 const TIMEOUT = 4_000;
 const ANIMATION_DURATION = 2_000;
