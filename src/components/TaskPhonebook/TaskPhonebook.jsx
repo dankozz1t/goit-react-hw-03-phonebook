@@ -14,13 +14,7 @@ import s from './TaskPhonebook.module.css';
 
 export default class TaskPhonebook extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      { id: 'id-5', name: 'Sergey Mentor 2', number: '666-66-66' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -31,6 +25,16 @@ export default class TaskPhonebook extends Component {
     if (parsedContacts) {
       this.setState({
         contacts: parsedContacts,
+      });
+    } else {
+      this.setState({
+        contacts: [
+          { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+          { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+          { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+          { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+          { id: 'id-5', name: 'Sergey Mentor 2', number: '666-66-66' },
+        ],
       });
     }
 
@@ -49,7 +53,7 @@ export default class TaskPhonebook extends Component {
 
     if (
       nextContacts.length !== prevContacts.length &&
-      prevContacts.length !== 5
+      prevContacts.length !== 0
     ) {
       login.submit();
     }
