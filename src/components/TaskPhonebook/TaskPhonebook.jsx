@@ -37,10 +37,6 @@ export default class TaskPhonebook extends Component {
         ],
       });
     }
-
-    this.setState({
-      totalContacts: this.state.contacts.length,
-    });
   }
 
   componentDidUpdate(prevProps, prevState) {
