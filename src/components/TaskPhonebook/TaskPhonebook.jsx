@@ -83,10 +83,8 @@ export default class TaskPhonebook extends Component {
   render() {
     const { contacts, filter } = this.state;
 
-    let renderContacts = contacts;
-
-    renderContacts = contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.trim())
+    let renderContacts = contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase().trim())
     );
 
     return (
